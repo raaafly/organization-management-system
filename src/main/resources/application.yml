@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/permisiteludb
+    username: postgres
+    password: admin
+  mail:
+    host: smtp.ethereal.email
+    port: 587
+    username: camryn.hermiston91@ethereal.email
+    password: E2rgYnh4ju1kjFeVey
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
