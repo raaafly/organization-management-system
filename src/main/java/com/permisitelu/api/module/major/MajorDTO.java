@@ -1,6 +1,5 @@
 package com.permisitelu.api.module.major;
 
-import com.permisitelu.api.module.faculty.FacultyDTO;
 import lombok.Data;
 
 import java.io.Serializable;
