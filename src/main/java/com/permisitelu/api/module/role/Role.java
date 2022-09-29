@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Roles")
 public class Role implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

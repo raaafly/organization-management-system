@@ -20,7 +20,6 @@ public class Major extends BaseEntity {
     @Column(name = "major_name", length = 100)
     private String name;
 
-
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = false)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;

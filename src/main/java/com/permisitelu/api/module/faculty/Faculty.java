@@ -18,6 +18,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Faculties")
 public class Faculty extends BaseEntity implements Serializable {
+
     @Column(name = "faculty_name", length = 100)
     private String name;
 }
