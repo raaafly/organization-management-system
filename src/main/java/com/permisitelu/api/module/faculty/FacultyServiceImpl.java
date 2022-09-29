@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,22 +27,22 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public FacultyDTO getFacultyById(Long id) {
-        Faculty faculty = getFaculty(id);
+        Faculty faculty = findFacultyId(id);
         return mapper.map(faculty, FacultyDTO.class);
     }
 
     @Override
     public FacultyDTO addFaculty(FacultyDTO object) {
         Faculty faculty = mapper.map(object, Faculty.class);
-        checkFacultyName(faculty);
+        findFacultyName(object);
         repository.save(faculty);
         return mapper.map(faculty, FacultyDTO.class);
     }
 
     @Override
     public FacultyDTO updateFacultyById(Long id, FacultyDTO object) {
-        Faculty faculty = getFaculty(id);
-        checkFacultyName(faculty);
+        Faculty faculty = findFacultyId(id);
+        findFacultyName(object);
         faculty.setName(object.getName());
         repository.save(faculty);
         return mapper.map(faculty, FacultyDTO.class);
@@ -51,18 +50,18 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public void deleteFacultyById(Long id) {
-        Faculty faculty = getFaculty(id);
+        Faculty faculty = findFacultyId(id);
         repository.delete(faculty);
     }
 
 
-    private Faculty getFaculty(Long id) {
+    private Faculty findFacultyId(Long id) {
         Faculty faculty = repository.findById(id).orElseThrow(() -> new NotFoundException("Faculty ID " + id + " Doesn't Exists!"));
         return faculty;
     }
 
-    private void checkFacultyName(Faculty faculty) {
-        boolean isExists = repository.existsByNameIgnoreCase(faculty.getName());
-        if (isExists) throw new FoundException("Faculty Name " + faculty.getName() + " Already Exists!");
+    private void findFacultyName(FacultyDTO object) {
+        boolean isExists = repository.existsByNameIgnoreCase(object.getName());
+        if (isExists) throw new FoundException("Faculty Name " + object.getName() + " Already Exists!");
     }
 }

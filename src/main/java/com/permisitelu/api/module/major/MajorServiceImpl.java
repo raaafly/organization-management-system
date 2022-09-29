@@ -27,14 +27,14 @@ public class MajorServiceImpl implements MajorService {
 
     @Override
     public MajorDTO getMajorById(Long id) {
-        Major findId = getMajor(id);
+        Major findId = findMajorId(id);
         return mapper.map(findId, MajorDTO.class);
     }
 
     @Override
     public MajorDTO addMajor(MajorDTO object) {
         Major major = mapper.map(object, Major.class);
-        checkMajorName(major);
+        findMajorName(object);
         major.setName(object.getName());
         repository.save(major);
         return mapper.map(major, MajorDTO.class);
@@ -42,8 +42,8 @@ public class MajorServiceImpl implements MajorService {
 
     @Override
     public MajorDTO updateMajorById(Long id, MajorDTO object) {
-        Major major = getMajor(id);
-        checkMajorName(major);
+        Major major = findMajorId(id);
+        findMajorName(object);
         major.setName(object.getName());
         repository.save(major);
         return mapper.map(major, MajorDTO.class);
@@ -51,17 +51,17 @@ public class MajorServiceImpl implements MajorService {
 
     @Override
     public void deleteMajorById(Long id) {
-        Major major = getMajor(id);
+        Major major = findMajorId(id);
         repository.delete(major);
     }
 
-    private Major getMajor(Long id) {
+    private Major findMajorId(Long id) {
         Major major = repository.findById(id).orElseThrow(() -> new NotFoundException("Major ID " + id + " Doesn't Exist!"));
         return major;
     }
 
-    private void checkMajorName(Major major) {
-        boolean isExists = repository.existsByNameIgnoreCase(major.getName());
-        if(isExists) throw new FoundException("Major Name " + major.getName() + "Already Exists!");
+    private void findMajorName(MajorDTO object) {
+        boolean isExists = repository.existsByNameIgnoreCase(object.getName());
+        if(isExists) throw new FoundException("Major Name " + object.getName() + " Already Exists!");
     }
 }
