@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.department;
+package com.permisitelu.api.module.Department;
 
 import com.permisitelu.api.exception.FoundException;
 import com.permisitelu.api.exception.NotFoundException;

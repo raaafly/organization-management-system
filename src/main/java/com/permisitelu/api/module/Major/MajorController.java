@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.major;
+package com.permisitelu.api.module.Major;
 
 import com.permisitelu.api.common.BaseController;
 import com.permisitelu.api.common.ResponseMessage;

@@ -1,9 +1,9 @@
-package com.permisitelu.api.module.major;
+package com.permisitelu.api.module.Faculty;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MajorRepository extends JpaRepository<Major, Long> {
+public interface FacultyRepository extends JpaRepository<Faculty, Long> {
     boolean existsByNameIgnoreCase(String name);
 }

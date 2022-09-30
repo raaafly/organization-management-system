@@ -1,9 +1,9 @@
-package com.permisitelu.api.module.faculty;
+package com.permisitelu.api.module.Department;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FacultyRepository extends JpaRepository<Faculty, Long> {
+public interface DepartmentRepository extends JpaRepository<Department, Long> {
     boolean existsByNameIgnoreCase(String name);
 }

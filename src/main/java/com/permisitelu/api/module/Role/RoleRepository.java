@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.role;
+package com.permisitelu.api.module.Role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

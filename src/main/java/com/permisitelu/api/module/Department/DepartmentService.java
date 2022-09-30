@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.department;
+package com.permisitelu.api.module.Department;
 
 import java.util.List;
 

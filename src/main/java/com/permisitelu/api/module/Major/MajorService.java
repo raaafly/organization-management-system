@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.major;
+package com.permisitelu.api.module.Major;
 
 import java.util.List;
 

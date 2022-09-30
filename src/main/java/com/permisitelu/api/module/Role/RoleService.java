@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.role;
+package com.permisitelu.api.module.Role;
 
 import java.util.List;
 

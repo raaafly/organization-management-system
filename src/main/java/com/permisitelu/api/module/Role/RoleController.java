@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.role;
+package com.permisitelu.api.module.Role;
 
 import com.permisitelu.api.common.BaseController;
 import com.permisitelu.api.common.ResponseMessage;

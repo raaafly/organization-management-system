@@ -1,7 +1,7 @@
-package com.permisitelu.api.module.major;
+package com.permisitelu.api.module.Major;
 
 import com.permisitelu.api.module.BaseEntity;
-import com.permisitelu.api.module.faculty.Faculty;
+import com.permisitelu.api.module.Faculty.Faculty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
