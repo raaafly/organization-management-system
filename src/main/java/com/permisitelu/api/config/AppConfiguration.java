@@ -1,13 +1,15 @@
 package com.permisitelu.api.config;
 
-import com.permisitelu.api.module.faculty.Faculty;
-import com.permisitelu.api.module.faculty.FacultyRepository;
-import com.permisitelu.api.module.major.Major;
-import com.permisitelu.api.module.major.MajorRepository;
-import com.permisitelu.api.module.role.Role;
-import com.permisitelu.api.module.role.RoleRepository;
-import com.permisitelu.api.module.user.User;
-import com.permisitelu.api.module.user.UserRepository;
+import com.permisitelu.api.module.Department.Department;
+import com.permisitelu.api.module.Department.DepartmentRepository;
+import com.permisitelu.api.module.Faculty.Faculty;
+import com.permisitelu.api.module.Faculty.FacultyRepository;
+import com.permisitelu.api.module.Major.MajorRepository;
+import com.permisitelu.api.module.Role.Role;
+import com.permisitelu.api.module.Role.RoleRepository;
+import com.permisitelu.api.module.User.User;
+import com.permisitelu.api.module.User.UserRepository;
+import com.permisitelu.api.utility.DataFaker;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -31,43 +33,23 @@ public class AppConfiguration {
     private final RoleRepository roleRepository;
     private final MajorRepository majorRepository;
     private final FacultyRepository facultyRepository;
+    private final DepartmentRepository departmentRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Bean
     CommandLineRunner runner() {
         return args -> {
-            Role SA = new Role(null, "SUPER ADMIN");
-            Role ADMIN = new Role(null, "ADMINISTRATOR");
-            Role MODERATOR = new Role(null, "MODERATOR");
-            Role MEMBER = new Role(null, "MEMBER");
-            roleRepository.save(SA);
-            roleRepository.save(ADMIN);
-            roleRepository.save(MODERATOR);
-            roleRepository.save(MEMBER);
+            for (String department : DataFaker.departmentFaker) {
+                departmentRepository.save(new Department(department));
+            }
 
-            Faculty FTE = new Faculty("Teknik Elektro");
-            Faculty FIF = new Faculty("Informatika");
-            Faculty FRI = new Faculty("Rekayasa Industri");
-            facultyRepository.save(FTE);
-            facultyRepository.save(FIF);
-            facultyRepository.save(FRI);
+            for (String role : DataFaker.roleFaker) {
+                roleRepository.save(new Role(null, role));
+            }
 
-            Major TE = new Major("Teknik Elektro", FTE);
-            Major TK = new Major("Teknik Komputer", FTE);
-            Major TT = new Major("Teknik Telekomunikasi", FTE);
-            Major TI = new Major("Teknik Industri", FRI);
-            Major SI = new Major("Sistem Informasi", FRI);
-            Major TL = new Major("Teknik Logistik", FRI);
-            Major IF = new Major("Informatika", FIF);
-            Major DS = new Major("Data Science", FIF);
-            majorRepository.save(TE);
-            majorRepository.save(TK);
-            majorRepository.save(TT);
-            majorRepository.save(TI);
-            majorRepository.save(SI);
-            majorRepository.save(TL);
-            majorRepository.save(IF);
-            majorRepository.save(DS);
+            for (String faculty : DataFaker.facultyFaker) {
+                facultyRepository.save(new Faculty(faculty));
+            }
 
             Role superAdmin = roleRepository.findById(Long.valueOf(1)).orElse(null);
             Role admin = roleRepository.findById(Long.valueOf(2)).orElse(null);
