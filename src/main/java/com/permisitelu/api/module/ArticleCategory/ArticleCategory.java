@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.Faculty;
+package com.permisitelu.api.module.ArticleCategory;
 
 import com.permisitelu.api.module.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "Faculties")
-public class Faculty extends BaseEntity implements Serializable {
-    @Column(name = "faculty_name", length = 100)
+@Table(name = "Article_Categories")
+public class ArticleCategory extends BaseEntity implements Serializable {
+    @Column(name = "article_category_name", length = 100)
     private String name;
 }

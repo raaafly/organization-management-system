@@ -21,30 +21,34 @@ public class FacultyController implements BaseController<FacultyDTO> {
 
     @Override
     @GetMapping
-    public ResponseEntity<List<FacultyDTO>> getAll() {
-        List<FacultyDTO> faculties = service.getFaculties();
-        return new ResponseEntity<>(faculties, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getAll() {
+        List<FacultyDTO> data = service.getFaculties();
+        ResponseMessage message = new ResponseMessage("Get All Faculties", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @GetMapping(path = "/{id}")
-    public ResponseEntity<FacultyDTO> getById(@PathVariable("id") Long id) {
-        FacultyDTO faculty = service.getFacultyById(id);
-        return new ResponseEntity<>(faculty, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getById(@PathVariable("id") Long id) {
+        FacultyDTO data = service.getFacultyById(id);
+        ResponseMessage message = new ResponseMessage("Get Faculty Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PostMapping
-    public ResponseEntity<FacultyDTO> create(@RequestBody @Valid FacultyDTO object) {
-        FacultyDTO addFaculty = service.addFaculty(object);
-        return new ResponseEntity<>(addFaculty, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> create(@RequestBody @Valid FacultyDTO object) {
+        FacultyDTO data = service.addFaculty(object);
+        ResponseMessage message = new ResponseMessage("Add New Faculty Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PutMapping(path = "/{id}")
-    public ResponseEntity<FacultyDTO> update(@PathVariable("id") Long id, @RequestBody @Valid FacultyDTO object) {
-        FacultyDTO updateFaculty = service.updateFacultyById(id, object);
-        return new ResponseEntity<>(updateFaculty, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> update(@PathVariable("id") Long id, @RequestBody @Valid FacultyDTO object) {
+        FacultyDTO data = service.updateFacultyById(id, object);
+        ResponseMessage message = new ResponseMessage("Update Faculty Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
@@ -52,7 +56,7 @@ public class FacultyController implements BaseController<FacultyDTO> {
     public ResponseEntity<ResponseMessage> delete(@PathVariable("id") Long id) {
         service.deleteFacultyById(id);
 
-        ResponseMessage message = new ResponseMessage("Faculty ID " + id + "Deleted Successfully!");
+        ResponseMessage message = new ResponseMessage("Delete Faculty Id " + id + " Successfully!", HttpStatus.OK);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

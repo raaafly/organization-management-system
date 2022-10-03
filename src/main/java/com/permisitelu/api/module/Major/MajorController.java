@@ -21,37 +21,41 @@ public class MajorController implements BaseController<MajorDTO> {
 
     @Override
     @GetMapping
-    public ResponseEntity<List<MajorDTO>> getAll() {
-        List<MajorDTO> getMajors = service.getMajors();
-        return new ResponseEntity<>(getMajors, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getAll() {
+        List<MajorDTO> data = service.getMajors();
+        ResponseMessage message = new ResponseMessage("Get All Major", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @GetMapping(path = "/{id}")
-    public ResponseEntity<MajorDTO> getById(@PathVariable("id") Long id) {
-        MajorDTO getMajorById = service.getMajorById(id);
-        return new ResponseEntity<>(getMajorById, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getById(@PathVariable("id") Long id) {
+        MajorDTO data = service.getMajorById(id);
+        ResponseMessage message = new ResponseMessage("Get Major Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PostMapping
-    public ResponseEntity<MajorDTO> create(@RequestBody @Valid MajorDTO object) {
-        MajorDTO createMajor = service.addMajor(object);
-        return new ResponseEntity<>(createMajor, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> create(@RequestBody @Valid MajorDTO object) {
+        MajorDTO data = service.addMajor(object);
+        ResponseMessage message = new ResponseMessage("Add New Major Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PutMapping(path = "/{id}")
-    public ResponseEntity<MajorDTO> update(@PathVariable("id") Long id, @RequestBody @Valid MajorDTO object) {
-        MajorDTO updateMajor = service.updateMajorById(id, object);
-        return new ResponseEntity<>(updateMajor, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> update(@PathVariable("id") Long id, @RequestBody @Valid MajorDTO object) {
+        MajorDTO data = service.updateMajorById(id, object);
+        ResponseMessage message = new ResponseMessage("Update Major Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<ResponseMessage> delete(@PathVariable("id") Long id) {
         service.deleteMajorById(id);
-        ResponseMessage message = new ResponseMessage("Major ID " + id + " Deleted Successfully!");
+        ResponseMessage message = new ResponseMessage("Delete Major Id " + id + " Successfully!", HttpStatus.OK);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

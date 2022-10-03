@@ -9,5 +9,6 @@ import java.io.Serializable;
  */
 @Data
 public class FacultyDTO implements Serializable {
+    private Long id;
     private String name;
 }
