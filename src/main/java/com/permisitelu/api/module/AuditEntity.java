@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,10 +19,10 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class Auditable implements Serializable {
-
+@EntityListeners(AuditingEntityListener.class)
+public abstract class AuditEntity implements Serializable {
     @CreatedBy
-    @Column(name = "created_by", updatable = false)
+    @Column(name = "created_by", insertable = false, updatable = false)
     private String createdBy;
 
     @LastModifiedBy
@@ -29,10 +31,10 @@ public abstract class Auditable implements Serializable {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", insertable = false, updatable = false)
     private Date createdAt;
 
-    @LastModifiedBy
+    @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
     private Date updatedAt;

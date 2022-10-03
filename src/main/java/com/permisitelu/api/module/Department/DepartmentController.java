@@ -16,42 +16,45 @@ import java.util.List;
 @RequestMapping(path = "/departments")
 @RequiredArgsConstructor
 public class DepartmentController implements BaseController<DepartmentDTO> {
-
     private final DepartmentService service;
 
     @Override
     @GetMapping
-    public ResponseEntity<List<DepartmentDTO>> getAll() {
-        List<DepartmentDTO> departments = service.getDepartments();
-        return new ResponseEntity<>(departments, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getAll() {
+        List<DepartmentDTO> data = service.getDepartments();
+        ResponseMessage message = new ResponseMessage("Get All Departments", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @GetMapping(path = "/{id}")
-    public ResponseEntity<DepartmentDTO> getById(@PathVariable("id") Long id) {
-        DepartmentDTO department = service.getDepartmentById(id);
-        return new ResponseEntity<>(department, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> getById(@PathVariable("id") Long id) {
+        DepartmentDTO data = service.getDepartmentById(id);
+        ResponseMessage message = new ResponseMessage("Get Department Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PostMapping
-    public ResponseEntity<DepartmentDTO> create(@RequestBody @Valid DepartmentDTO object) {
-        DepartmentDTO createDepartment = service.addDepartment(object);
-        return new ResponseEntity<>(createDepartment, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> create(@RequestBody @Valid DepartmentDTO object) {
+        DepartmentDTO data = service.addDepartment(object);
+        ResponseMessage message = new ResponseMessage("Add New Department Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @PutMapping(path = "/{id}")
-    public ResponseEntity<DepartmentDTO> update(@PathVariable("id") Long id, @RequestBody @Valid DepartmentDTO object) {
-        DepartmentDTO updateDepartment = service.updateDepartmentById(id, object);
-        return new ResponseEntity<>(updateDepartment, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> update(@PathVariable("id") Long id, @RequestBody @Valid DepartmentDTO object) {
+        DepartmentDTO data = service.updateDepartmentById(id, object);
+        ResponseMessage message = new ResponseMessage("Update Department Id " + id + " Successfully!", data, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @Override
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<ResponseMessage> delete(@PathVariable("id") Long id) {
         service.deleteDepartmentById(id);
-        ResponseMessage message = new ResponseMessage("Department ID " + id + " Deleted Successfully!");
+        ResponseMessage message = new ResponseMessage("Delete Department Id " + id + " Successfully!", HttpStatus.OK);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

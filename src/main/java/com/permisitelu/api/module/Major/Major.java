@@ -16,12 +16,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Majors")
 public class Major extends BaseEntity {
-
     @Column(name = "major_name", length = 100)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = false)
-    @JoinColumn(name = "faculty_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     private Faculty faculty;
 
 }

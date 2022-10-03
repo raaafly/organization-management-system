@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
-
     private final ModelMapper mapper;
     private final DepartmentRepository repository;
 
@@ -33,17 +32,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDTO addDepartment(DepartmentDTO object) {
-        Department department = mapper.map(object, Department.class);
         findDepartmentName(object);
-        department.setName(object.getName());
+        Department department = mapper.map(object, Department.class);
         repository.save(department);
         return mapper.map(department, DepartmentDTO.class);
     }
 
     @Override
     public DepartmentDTO updateDepartmentById(Long id, DepartmentDTO object) {
-        Department department = findDepartmentId(id);
         findDepartmentName(object);
+        Department department = findDepartmentId(id);
         department.setName(object.getName());
         repository.save(department);
         return mapper.map(department, DepartmentDTO.class);

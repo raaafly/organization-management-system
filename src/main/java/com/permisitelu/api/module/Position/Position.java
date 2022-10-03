@@ -1,4 +1,4 @@
-package com.permisitelu.api.module.Faculty;
+package com.permisitelu.api.module.Position;
 
 import com.permisitelu.api.module.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "Faculties")
-public class Faculty extends BaseEntity implements Serializable {
-    @Column(name = "faculty_name", length = 100)
+@Table(name = "Positions")
+public class Position extends BaseEntity implements Serializable {
+    @Column(name = "position_name", length = 50)
     private String name;
 }
