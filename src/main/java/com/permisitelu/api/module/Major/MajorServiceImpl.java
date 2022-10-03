@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class MajorServiceImpl implements MajorService {
-
     private final ModelMapper mapper;
     private final MajorRepository repository;
 
